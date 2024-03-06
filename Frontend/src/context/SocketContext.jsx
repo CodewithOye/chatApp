@@ -19,7 +19,7 @@ export const SocketContextProvider = ({ children  }) => {
     useEffect(() =>{
         // Create a new web socket connection.
         if(authUser){
-            const socket = io("http://localhost:5000",{
+            const socket = io("https://mern-chat-app-k2yy.onrender.com/",{
                 query: {
                     userId: authUser._id,
                 },
