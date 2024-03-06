@@ -6,10 +6,13 @@ import userRoutes from "./routes/user.routes.js"
 import connectToMongoDb from "./db/connectToMongoDb.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./socket/socket.js";
-import { Server } from "socket.io";
+import path from "path"
 
 
 const PORT = process.env.PORT || 5000;
+
+
+const __dirname = path.resolve();
 
 
 
@@ -22,10 +25,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-// app.get("/",(req,res) => {
-    // root route Http://localhost:5000/
-//     res.send('Hello World!');
-// });
+
+app.use(express.static(path.join(__dirname, "/Frontend/dist")));
+
+app.get("*", (req,res) => {
+    res.sendFile(path.join(__dirname, "Frontend", "dist", "index.html"));
+})
 
 
 
